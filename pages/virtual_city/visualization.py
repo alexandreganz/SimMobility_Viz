@@ -691,9 +691,11 @@ def create_maps_time(category, subcategory, scenario, zone, variable):
     # Read geospatial data from a shapefile into a GeoPandas GeoDataFrame and project it to EPSG:4326
     gdf = gpd.read_file('data/shp_files/virtual_city/sm_zone.shp', ignore_fields=['cbd', 'area']).to_crs(epsg=4326)
     gdf.index += 1
-
-    # Group the DataFrame by 'origin_taz' and 'time_range_2' and calculate the mean of 'total_distance' and 'travel_time'
-    df = df.groupby([zone, 'time_range_2']).agg({variable : 'mean'}).round(2).reset_index()
+    
+    if variable == 'count':
+        df = df.groupby([zone, 'time_range_2']).agg({variable : 'count'}).round(2).reset_index()
+    else:
+        df = df.groupby([zone, 'time_range_2']).agg({variable : 'mean'}).round(2).reset_index()
 
     # Convert the 'time_range_2' column to datetime format
     df['time_range_2'] = pd.to_datetime(df['time_range_2'], format='%H:%M')
@@ -717,7 +719,7 @@ def create_maps_time(category, subcategory, scenario, zone, variable):
         locations=df.iloc[:, 0],
         animation_frame='time_range_2',
         animation_group=zone,
-        labels={'travel_time': 'Avg minutes','total_distance': 'Avg Distance', 'destination_taz': 'zone','origin_taz': 'zone', 'time_range_2': 'Hour'}
+        labels={'travel_time': 'Avg minutes','total_distance': 'Avg Distance','count':'Sum of Trips', 'destination_taz': 'zone','origin_taz': 'zone', 'time_range_2': 'Hour'}
     )
 
     # Update geos settings

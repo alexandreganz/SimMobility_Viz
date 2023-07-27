@@ -253,7 +253,8 @@ layout = html.Div(
                         dcc.RadioItems(
                             id='variable-target',
                             options= [{'label':'Average Distance' , 'value': 'total_distance'},
-                                      {'label':'Average Time' , 'value': 'travel_time'}],
+                                      {'label':'Average Time' , 'value': 'travel_time'},
+                                      {'label':'Count of Trips' , 'value': 'count'}],
                             value = 'travel_time',
                             style={"display": "none"}
                 )],style={'backgroundColor':'white','box-shadow': '2px 2px 5px rgba(0, 0, 0, 0.3)'})
@@ -286,14 +287,14 @@ layout = html.Div(
         html.Br(),
         dbc.Row(
             [
-                html.H3("Individual Trips Visualization",  style={'font-weight': 'bold'}),
+                html.H3("Individual Trips Visualization",  id ='kepler-title', style={'font-weight': 'bold', "display": "none"}),
+                html.Br(),
                 html.Iframe(id='kepler_map_trips', src='',height='800', width='800')
                 
             ]
-        )
+        ),
         ],
     className="content", style={'backgroundColor':'#f8f9fa'})
-
 
 
 
@@ -360,14 +361,15 @@ def kpi(output_message):
           Output('block_filters_2','style'),
           Output('block_filters_3','style'),
           Output('block_filters_4','style'),
+          Output('kepler-title','style'),
           Input('output-message','children'),
           )
 def dropdown_appear(output_message):
     if output_message == " ":
-        return {"display": "block"},{"display": "block"},{"display": "table"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "table"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "flex"},{"display": "flex"},{"flex": "flex"},{"display": "flex"}
+        return {"display": "block"},{"display": "block"},{"display": "table"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "table"},{"display": "block"},{"display": "block"},{"display": "block"},{"display": "flex"},{"display": "flex"},{"flex": "flex"},{"display": "flex"},{"display": "block"}
     else:
         # Return an empty div if visualization_1 is None
-        return {"display": "none"}, {"display": "none"}, {"display": "none"}, {"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"}
+        return {"display": "none"}, {"display": "none"}, {"display": "none"}, {"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"},{"display": "none"}
 
 
 
