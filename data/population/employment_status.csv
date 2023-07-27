@@ -1,0 +1,13 @@
+id,name
+1,Employed Full Time
+2,Employed Part Time
+3,Self-Employed
+4,Full-time Student
+5,Homemaker
+6,Retired
+7,Unemployed
+8,National service
+9,Voluntary worker
+10,Domestic worker
+12,Other
+99,Unknown

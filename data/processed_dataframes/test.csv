@@ -1,0 +1,7 @@
+gender,label,0,Percentage
+Male,scenario_1,48179,53.75
+Male,scenario_2,48174,53.75
+Male,baseline,48168,53.75
+Female,scenario_1,41457,46.25
+Female,baseline,41450,46.25
+Female,scenario_2,41448,46.25
